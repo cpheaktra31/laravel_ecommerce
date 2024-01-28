@@ -1,2 +1,2 @@
-# laravel_ecommerce
+# Laravel E-Commerce
 This project is for my assignment
