@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductInOutController;
 use App\Http\Controllers\ProductOutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SlideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('product/get-data', [ProductController::class, 'getData'])->name('product.get-data');
     Route::resource('product', ProductController::class);
     // Products
+
+    // Slide
+    Route::get('slide/get-data', [SlideController::class, 'getData'])->name('slide.get-data');
+    Route::post('slide/btn-active/{slide}', [SlideController::class, 'btnActive'])->name('slide.btn-active');
+    Route::post('slide/btn-promotion/{slide}', [SlideController::class, 'btnPromotion'])->name('slide.btn-promotion');
+    Route::resource('slide', SlideController::class);
+    // Slide
 
     // Dashboard
     Route::get('dash-board/get-monthly-stock', [DashboardController::class, 'getMonthlyStock'])->name('dash-board.get-monthly-stock');

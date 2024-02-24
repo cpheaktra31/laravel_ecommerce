@@ -26,7 +26,7 @@
                 </li>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Inventory</span>
+                    <span class="hide-menu">Products</span>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('category.index') }}" aria-expanded="false">
@@ -36,16 +36,24 @@
                         <span class="hide-menu">Categories</span>
                     </a>
                 </li>
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">Products</span>
-                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('product.index') }}" aria-expanded="false">
                         <span>
                             <i class="ri-box-3-line fs-5"></i>
                         </span>
-                        <span class="hide-menu">All Products</span>
+                        <span class="hide-menu">Products</span>
+                    </a>
+                </li>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Features</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('slide.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ri-box-3-line fs-5"></i>
+                        </span>
+                        <span class="hide-menu">Slides</span>
                     </a>
                 </li>
                 <li class="nav-small-cap">

@@ -26,7 +26,7 @@ class AdminController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Getting user success!',
+                'message' => 'Get user success!',
                 'result' => $data
             ]);
         } catch (\Throwable $th) {
@@ -89,7 +89,7 @@ class AdminController extends Controller
             $users = User::withoutTrashed()->get();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Adding user success!',
+                'message' => 'Add user success!',
                 'result' => $users
             ]);
         } catch (\Throwable $th) {
@@ -135,7 +135,7 @@ class AdminController extends Controller
             $users = User::withoutTrashed()->get();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Updating product success!',
+                'message' => 'Update user success!',
                 'result' => $users,
             ]);
         } catch (\Throwable $th) {

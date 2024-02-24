@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -75,6 +76,7 @@ class ProductController extends Controller
                 'price' => 'required',
                 'description_en' => 'required',
                 'description_kh' => 'required',
+                'featured_image' => 'nullable|image|max:2048',
             ]);
 
             if ($validator->fails()) {
@@ -117,7 +119,8 @@ class ProductController extends Controller
                 if (is_file(file_exists($filePath))) {
                     unlink($filePath);
                 }
-                $path = $request->file('featured_image')->storeAs('images', $fileName, 'public');
+                $currentMonth = Carbon::now()->month;
+                $path = $request->file('featured_image')->storeAs('images/product/'.$currentMonth, $fileName, 'public');
                 $data['featured_image'] = '/storage/'.$path;
             } else {
                 $data['featured_image'] = null;
@@ -171,6 +174,7 @@ class ProductController extends Controller
                 'name_en' => 'required',
                 'name_kh' => 'required',
                 'category_id' => 'required',
+                'featured_image' => 'nullable|image|max:2048',
             ]);
 
             if ($validator->fails()) {
@@ -188,8 +192,9 @@ class ProductController extends Controller
                 if (File::exists($filePath)) {
                     File::delete($filePath);
                 }
+                $currentMonth = Carbon::now()->month;
                 $fileName = $request->file('featured_image')->getClientOriginalName();
-                $path = $request->file('featured_image')->storeAs('images', $fileName, 'public');
+                $path = $request->file('featured_image')->storeAs('images/product/'.$currentMonth, $fileName, 'public');
                 $data->featured_image = '/storage/' . $path;
             }
 

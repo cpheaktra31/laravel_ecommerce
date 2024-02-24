@@ -25,13 +25,13 @@
                                     value="{{ old('price') }}">
                             </div>
                             <div class="mb-3">
-                                <label for="description_en">Description (English) <span
-                                        class="text-danger">*</span> :</label>
+                                <label for="description_en">Description (English) <span class="text-danger">*</span>
+                                    :</label>
                                 <textarea id="description_en" name="description_en">{{ old('description_en') }}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="description_kh">Description (Khmer) <span
-                                        class="text-danger">*</span> :</label>
+                                <label for="description_kh">Description (Khmer) <span class="text-danger">*</span>
+                                    :</label>
                                 <textarea id="description_kh" name="description_kh">{{ old('description_kh') }}</textarea>
                             </div>
                         </div>
@@ -46,12 +46,12 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            <div class="">
                                 <label for="featured_image">Feature Image:</label>
                                 <input type="file" name="featured_image" class="form-control" id="featured_image"
                                     accept="image/*">
                             </div>
-                            <img src="" id="displayFeaturedImage" class="img-fluid" alt="">
+                            <img src="" id="displayFeaturedImage" class="img-fluid mb-3 mt-3" alt="">
                             <div class="mb-3">
                                 <label for="short_info_en">Short Info (English)</label>
                                 <textarea name="short_info_en" class="form-control" id="short_info_en" rows="3">{{ old('short_info_en') }}</textarea>

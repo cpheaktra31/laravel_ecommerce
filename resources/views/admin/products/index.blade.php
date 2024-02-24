@@ -317,6 +317,7 @@
                         getData();
                     } else {
                         $('#pageLoading').hide();
+                        console.log(response.result);
                         toastr.error(response.message);
                     }
                 }

@@ -9,7 +9,7 @@ function preloadImage(img) {
 }
 const imgObtions = {
     threshold: 0,
-    rootMargin: "0px 0px 100px 0px"
+    rootMargin: "0px 0px 100px 0px",
 };
 const imgObserver = new IntersectionObserver((entries, imgObserver) => {
     entries.forEach((entry) => {
@@ -19,7 +19,7 @@ const imgObserver = new IntersectionObserver((entries, imgObserver) => {
             preloadImage(entry.target);
             imgObserver.unobserve(entry.target);
         }
-    }, imgObtions)
+    }, imgObtions);
 });
 images.forEach((image) => {
     imgObserver.observe(image);
@@ -28,20 +28,20 @@ images.forEach((image) => {
 
 //==== Toastr ====
 toastr.options = {
-    "closeButton": true,
-    "progressBar": true,
-    "positionClass": "toast-top-right",
-    "showDuration": "100",
-    "hideDuration": "100",
-    "timeOut": "5000",
-    "extendedTimeOut": "3000",
-    "showEasing": "swing",
-    "hideEasing": "swing",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-}
+    closeButton: true,
+    progressBar: true,
+    positionClass: "toast-bottom-center",
+    showDuration: "100",
+    hideDuration: "100",
+    timeOut: "5000",
+    extendedTimeOut: "3000",
+    showEasing: "swing",
+    hideEasing: "swing",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut",
+};
 //==== Toastr ====
 
 //==== Hide Loading ====
-$('#pageLoading').hide();
+$("#pageLoading").hide();
 //==== Hide Loading ====
