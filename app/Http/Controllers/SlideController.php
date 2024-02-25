@@ -75,8 +75,6 @@ class SlideController extends Controller
             }
             $data = $request->all();
 
-            // $data['is_active'] = $request->is_active ?? 0;
-            // $data['is_promotion'] = $request->is_promotion ?? 0;
             $data['ordering'] = $request->is_active ?? 0;
 
             if ($request->hasFile('image')) {
@@ -86,7 +84,7 @@ class SlideController extends Controller
                 if (is_file(file_exists($filePath))) {
                     unlink($filePath);
                 }
-                $currentMonth = Carbon::now()->month;
+                $currentMonth = Carbon::now()->format('m');
                 $path = $request->file('image')->storeAs('images/slides/' . $currentMonth, $fileName, 'public');
                 $data['image'] = '/storage/' . $path;
             } else {
@@ -100,7 +98,7 @@ class SlideController extends Controller
                 if (is_file(file_exists($filePath))) {
                     unlink($filePath);
                 }
-                $currentMonth = Carbon::now()->month;
+                $currentMonth = Carbon::now()->format('m');
                 $path = $request->file('background')->storeAs('images/slides/' . $currentMonth, $fileName, 'public');
                 $data['background'] = '/storage/' . $path;
             } else {
@@ -171,7 +169,6 @@ class SlideController extends Controller
             $data->short_info_en = $request->short_info_en;
             $data->short_info_kh = $request->short_info_kh;
             $data->url = $request->url;
-            // $data->is_active = $request->is_active;
             $data->ordering = $request->ordering;
 
             if ($request->hasFile('image')) {
@@ -179,7 +176,7 @@ class SlideController extends Controller
                 if (File::exists($filePath)) {
                     File::delete($filePath);
                 }
-                $currentMonth = Carbon::now()->month;
+                $currentMonth = Carbon::now()->format('m');
                 $fileName = $request->file('image')->getClientOriginalName();
                 $path = $request->file('image')->storeAs('images/slides/' . $currentMonth, $fileName, 'public');
                 $data->image = '/storage/' . $path;
@@ -190,7 +187,7 @@ class SlideController extends Controller
                 if (File::exists($filePath)) {
                     File::delete($filePath);
                 }
-                $currentMonth = Carbon::now()->month;
+                $currentMonth = Carbon::now()->format('m');
                 $fileName = $request->file('background')->getClientOriginalName();
                 $path = $request->file('background')->storeAs('images/slides/' . $currentMonth, $fileName, 'public');
                 $data->background = '/storage/' . $path;
@@ -261,6 +258,10 @@ class SlideController extends Controller
             ]);
         }
     }
+
+    /*______________
+    |   Promotion Button
+    */
     public function btnPromotion($id)
     {
         try {

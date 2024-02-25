@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\Supplier;
-use App\Models\Branch;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 
@@ -119,7 +116,7 @@ class ProductController extends Controller
                 if (is_file(file_exists($filePath))) {
                     unlink($filePath);
                 }
-                $currentMonth = Carbon::now()->month;
+                $currentMonth = Carbon::now()->format('m');
                 $path = $request->file('featured_image')->storeAs('images/product/'.$currentMonth, $fileName, 'public');
                 $data['featured_image'] = '/storage/'.$path;
             } else {
@@ -192,7 +189,7 @@ class ProductController extends Controller
                 if (File::exists($filePath)) {
                     File::delete($filePath);
                 }
-                $currentMonth = Carbon::now()->month;
+                $currentMonth = Carbon::now()->format('m');
                 $fileName = $request->file('featured_image')->getClientOriginalName();
                 $path = $request->file('featured_image')->storeAs('images/product/'.$currentMonth, $fileName, 'public');
                 $data->featured_image = '/storage/' . $path;

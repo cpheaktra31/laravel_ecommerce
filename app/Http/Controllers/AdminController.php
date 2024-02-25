@@ -76,7 +76,7 @@ class AdminController extends Controller
                 if (File::exists($filePath)) {
                     File::delete($filePath);
                 }
-                $path = $request->file('image')->storeAs('images', $fileName, 'public');
+                $path = $request->file('image')->storeAs('images/users', $fileName, 'public');
                 $data['image'] = '/storage/'.$path;
             } else {
                 $data['image'] = null;

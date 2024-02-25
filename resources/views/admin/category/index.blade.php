@@ -7,9 +7,10 @@
                 <div class="col-lg-12">
                     <div class="card shadow-sm">
                         <div class="card-header d-flex align-item-center">
-                            <h4 class="mb-0">Product List</h4>
+                            <h4 class="mb-0">Category List</h4>
                             <div class="ms-auto"></div>
-                            <button class="btn btn-sm btn-primary" onclick="addItem()" data-bs-toggle="modal" data-bs-target="#createFormModal">
+                            <button class="btn btn-sm btn-primary" onclick="addItem()" data-bs-toggle="modal"
+                                data-bs-target="#createFormModal">
                                 <i class="ri-add-line fs-3"></i> Add New
                             </button>
                         </div>
@@ -60,7 +61,7 @@
                 beforeSend: function() {
                     $('#pageLoading').show();
                 },
-                success: function(response){
+                success: function(response) {
                     if (response.status == 'success') {
                         $('#pageLoading').hide();
                         getDataTable(response.result);
@@ -76,8 +77,7 @@
         let getDataTable = (data) => {
             console.log(data);
 
-            let cols = [
-                {
+            let cols = [{
                     "data": "id",
                     "name": "id",
                     "searchable": true,
@@ -114,7 +114,8 @@
                     "orderable": true,
                     "visible": true,
                     render: function(created_at, type, row) {
-                        return created_at != null ? moment(created_at).format('MMM D, YYYY') : `<span class="text-body-tertiary">N/A</span>`;
+                        return created_at != null ? moment(created_at).format('MMM D, YYYY') :
+                            `<span class="text-body-tertiary">N/A</span>`;
                     }
                 },
                 {
@@ -187,7 +188,7 @@
                 beforeSend: function() {
                     $('#pageLoading').show();
                 },
-                success: function(response){
+                success: function(response) {
                     if (response.status == 'success') {
                         $('#pageLoading').hide();
                         assignEditData(response.result);
@@ -208,7 +209,7 @@
             $.ajax({
                 url: "{{ url('admin/category') }}/" + editID,
                 type: "post",
-                data:getFormValue('patch'),
+                data: getFormValue('patch'),
                 contentType: false,
                 processData: false,
                 headers: {
@@ -217,7 +218,7 @@
                 beforeSend: function() {
                     $('#pageLoading').show();
                 },
-                success: function(response){
+                success: function(response) {
                     if (response.status == 'success') {
                         $('#pageLoading').hide();
                         clearValue();
@@ -253,7 +254,7 @@
                 beforeSend: function() {
                     $('#pageLoading').show();
                 },
-                success: function(response){
+                success: function(response) {
                     if (response.status == 'success') {
                         $('#pageLoading').hide();
                         clearValue();
@@ -290,7 +291,7 @@
                         beforeSend: function() {
                             $('#pageLoading').show();
                         },
-                        success: function(response){
+                        success: function(response) {
                             if (response.status == 'success') {
                                 $('#pageLoading').hide();
                                 toastr.success(response.message);

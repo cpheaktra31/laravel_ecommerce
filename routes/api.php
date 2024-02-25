@@ -4,13 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\ProductInOutController;
-use App\Http\Controllers\ProductOutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +48,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('slide/btn-promotion/{slide}', [SlideController::class, 'btnPromotion'])->name('slide.btn-promotion');
     Route::resource('slide', SlideController::class);
     // Slide
+
+    // Blogs
+    Route::get('blog/get-data', [BlogController::class, 'getData'])->name('blog.get-data');
+    Route::post('blog/btn-active/{blog}', [BlogController::class, 'btnActive'])->name('blog.btn-active');
+    Route::resource('blog', BlogController::class);
+    // Blogs
 
     // Dashboard
     Route::get('dash-board/get-monthly-stock', [DashboardController::class, 'getMonthlyStock'])->name('dash-board.get-monthly-stock');

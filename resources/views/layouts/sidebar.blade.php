@@ -51,9 +51,17 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('slide.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ri-box-3-line fs-5"></i>
+                            <i class="ri-slideshow-3-line fs-5"></i>
                         </span>
                         <span class="hide-menu">Slides</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('blog.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ri-article-line fs-5"></i>
+                        </span>
+                        <span class="hide-menu">Blogs</span>
                     </a>
                 </li>
                 <li class="nav-small-cap">
