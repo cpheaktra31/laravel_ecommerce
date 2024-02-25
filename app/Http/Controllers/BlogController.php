@@ -21,8 +21,7 @@ class BlogController extends Controller
     */
     public function index()
     {
-        $categories = Blog::withoutTrashed()->get();
-        return view('admin.blogs.index', compact('categories'));
+        return view('admin.blogs.index');
     }
 
     /*______________

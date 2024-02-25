@@ -49,6 +49,14 @@
                     <span class="hide-menu">Features</span>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('menu.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ri-menu-unfold-line fs-5"></i>
+                        </span>
+                        <span class="hide-menu">Menu</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('slide.index') }}" aria-expanded="false">
                         <span>
                             <i class="ri-slideshow-3-line fs-5"></i>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $menu = Menu::all();
+        return view('home', compact('menu'));
+    }
+
+    public function getUrl($menu_type, $slug) {
+        $menu = Menu::where('slug_en', $slug)->first();
+        if(!$menu) {
+            return;
+        }
+        switch ($menu_type) {
+            case 'category':
+                return view('test.category', compact('menu'));
+            case 'sigle-page':
+                return view('test.single-page', compact('menu'));
+            default:
+                return view('home');
+        }
     }
 }

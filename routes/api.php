@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('blog/btn-active/{blog}', [BlogController::class, 'btnActive'])->name('blog.btn-active');
     Route::resource('blog', BlogController::class);
     // Blogs
+
+    // Menus
+    Route::get('menu/get-data', [MenuController::class, 'getData'])->name('menu.get-data');
+    Route::resource('menu', MenuController::class);
+    // Menus
 
     // Dashboard
     Route::get('dash-board/get-monthly-stock', [DashboardController::class, 'getMonthlyStock'])->name('dash-board.get-monthly-stock');

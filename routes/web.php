@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -25,7 +25,8 @@ Route::get('/dash-board', [DashboardController::class, 'index'])->name('dashboar
 Route::middleware(['auth:sanctum'])->group(function () {
 });
 
-
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/{menu_type}/{slug}', [HomeController::class, 'getUrl'])->name('url');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
