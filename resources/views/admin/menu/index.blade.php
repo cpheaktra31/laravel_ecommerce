@@ -22,7 +22,7 @@
                                     <th>Name (Title)</th>
                                     <th>Menu Type</th>
                                     <th>Type</th>
-                                    <th style="max-width: 60px !important;">Ordering</th>
+                                    <th style="max-width: 70px !important;">Ordering</th>
                                     <th>Action</th>
                                 </thead>
                                 <tbody></tbody>
