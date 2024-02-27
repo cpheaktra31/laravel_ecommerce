@@ -50,7 +50,7 @@
 @section('script')
     <script>
         $(document).ready(() => {
-            getData();
+            getDataTable();
 
             let getDefaultImage = () => {
                 let defaultImg = "{{ asset('assets/images/default.png') }}";
@@ -61,29 +61,8 @@
         let editID = null;
         $('#pageLoading').hide();
 
-        // Get Data Backend
-        let getData = () => {
-            $.ajax({
-                url: "{{ route('menu.get-data') }}",
-                type: "GET",
-                dataType: 'json',
-                beforeSend: function() {
-                    $('#pageLoading').show();
-                },
-                success: function(response) {
-                    if (response.status == 'success') {
-                        $('#pageLoading').hide();
-                        getDataTable(response.result);
-                    } else {
-                        $('#pageLoading').hide();
-                        toastr.error(response.message);
-                    }
-                }
-            });
-        }
-
         // Data Table
-        let getDataTable = (data) => {
+        const getDataTable = () => {
             let cols = [{
                     "data": "id",
                     "name": "id",
@@ -166,16 +145,28 @@
                 $('#dataTable').DataTable().destroy();
             }
 
-            let datatable = $('#dataTable').DataTable({
-                "data": data,
-                "columns": cols,
-                "buttons": [],
-                "order": [0, 'desc'],
-                "rowId": "id",
-                "responsive": "true",
-                dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
-                    "<'row'<'col-sm-12 table-responsive'tr>>" +
-                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            $('#dataTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('menu.get-data') }}",
+                    type: 'GET',
+                    data: function(d) {
+                        d.draw = d.draw;
+                        d.start = d.start;
+                        d.length = d.length;
+                        d.search = d.search;
+                        d.order = [{
+                            column: d.order[0].column,
+                            dir: d.order[0].dir
+                        }];
+                    },
+                    error: function(xhr, error, thrown) {
+                        // Handle error if needed
+                        console.log('ERR');
+                    }
+                },
+                columns: cols,
             });
         }
 
@@ -263,7 +254,7 @@
                         clearValue();
                         $('#createFormModal').modal('toggle');
                         toastr.success(response.message);
-                        getData();
+                        getDataTable();
                     } else {
                         $('#pageLoading').hide();
                         console.log(response.result);
@@ -300,7 +291,7 @@
                         clearValue();
                         $('#createFormModal').modal('toggle');
                         toastr.success(response.message);
-                        getData();
+                        getDataTable();
                     } else {
                         $('#pageLoading').hide();
                         toastr.error(response.message);
@@ -335,7 +326,7 @@
                             if (response.status == 'success') {
                                 $('#pageLoading').hide();
                                 toastr.success(response.message);
-                                getData();
+                                getDataTable();
                             } else {
                                 $('#pageLoading').hide();
                                 toastr.error(response.message);

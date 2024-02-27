@@ -14,10 +14,50 @@ class MenuController extends Controller
         $this->middleware('auth');
     }
 
+    protected function dataList(Request $request)
+    {
+        $query = Menu::query();
+        // Search
+        if ($request->has('search') && !empty($request->search['value'])) {
+            $searchValue = $request->search['value'];
+            $query->where(function ($q) use ($searchValue) {
+                $q->where('name_kh', 'like', "%$searchValue%")
+                  ->orWhere('name_en', 'like', "%$searchValue%");
+            });
+        }
+
+        // Get total after filtered
+        $total = $query->where('deleted_at', null)->count();
+
+        $req_order = $request->order;
+        // Sorting
+        if(isset($req_order)) {
+            $sortColumn = $request->columns[$req_order[0]['column']]['name'];
+            $sortDirection = $req_order[0]['dir'];
+            if ($sortColumn && $sortDirection) {
+                $query->orderBy($sortColumn, $sortDirection);
+            }
+        }
+
+        // Pagination
+        $start = $request->input('start', 0);
+        $length = $request->input('length', 10);
+        $query->skip($start)->take($length);
+
+        $data = $query->where('deleted_at', null)->get();
+
+        return [
+            'draw' => $request->input('draw', 1),
+            'recordsTotal' => $total,
+            'recordsFiltered' => $total,
+            'data' => $data
+        ];
+    }
+
     /*______________
     |   Index
     */
-    public function index()
+    public function index(Request $request)
     {
         $menu_types = DB::select("SELECT * FROM menu_type WHERE deleted_at IS NULL ORDER BY id DESC");
         return view('admin.menu.index', compact('menu_types'));
@@ -26,17 +66,19 @@ class MenuController extends Controller
     /*______________
     |   Get Data
     */
-    public function getData()
+    public function getData(Request $request)
     {
         try {
-            $sql = "SELECT * FROM menus WHERE deleted_at IS NULL ORDER BY ordering, id DESC";
-            $data = DB::select($sql);
+            // $sql = "SELECT * FROM menus WHERE deleted_at IS NULL ORDER BY ordering, id DESC";
+            // $data = DB::select($sql);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Getting menu success!',
-                'result' => $data
-            ]);
+            $data = $this->dataList($request);
+            $data['status'] = 'success';
+            $data['icon'] = 'success';
+
+            return response()->json(
+                $data
+            );
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
