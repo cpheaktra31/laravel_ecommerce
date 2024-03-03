@@ -43,7 +43,7 @@
                             </div>
                             <img src="" id="displayImage" class="img-fluid mb-3 mt-3" alt="">
                             <div class="">
-                                <label for="background">Thumbnail:</label>
+                                <label for="background">Background:</label>
                                 <input type="file" name="background" class="form-control" id="background"
                                     accept="image/*">
                             </div>
@@ -55,8 +55,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="btnStoreItem" onclick="storeItem()">Add</button>
-                <button type="button" class="btn btn-primary" id="btnUpdateItem"
-                    onclick="updateItem()">Update</button>
+                <button type="button" class="btn btn-primary" id="btnUpdateItem" onclick="updateItem()">Update</button>
             </div>
         </div>
     </div>

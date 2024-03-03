@@ -65,7 +65,7 @@ class AdminController extends Controller
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Password not match',
-                    'result' => $users
+                    'result' => ''
                 ]);
             }
             $data = $request->all();

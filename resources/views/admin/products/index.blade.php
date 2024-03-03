@@ -20,7 +20,10 @@
                                     <th>ID</th>
                                     <th>Image</th>
                                     <th>Name</th>
+                                    <th>Price</th>
                                     <th>Category</th>
+                                    <th>Active</th>
+                                    <th>Feature</th>
                                     <th>Action</th>
                                 </thead>
                                 <tbody></tbody>
@@ -28,7 +31,10 @@
                                     <th>ID</th>
                                     <th>Image</th>
                                     <th>Name</th>
+                                    <th>Price</th>
                                     <th>Category</th>
+                                    <th>Active</th>
+                                    <th>Feature</th>
                                     <th>Action</th>
                                 </tfoot>
                             </table>
@@ -140,7 +146,8 @@
                     "orderable": false,
                     "visible": true,
                     render: function(featured_image, type, row) {
-                        return featured_image != "undefined" ? `<img src="${featured_image}" alt="${featured_image}" height="40">` :
+                        return featured_image != "undefined" ?
+                            `<img src="${featured_image}" alt="${featured_image}" height="40">` :
                             `<img src="{{ asset('assets/images/default.png') }}" alt="default_${data.id}" height="40">`;
                     }
                 },
@@ -155,6 +162,17 @@
                     }
                 },
                 {
+                    "data": "price",
+                    "name": "price",
+                    "searchable": true,
+                    "orderable": true,
+                    "visible": true,
+                    render: function(price, type, row) {
+                        return price ? changeCurrency(price, "USD") :
+                            `<span class="text-body-tertiary">N/A</span>`;
+                    }
+                },
+                {
                     "data": "catNameEn",
                     "name": "catNameEn",
                     "searchable": true,
@@ -164,17 +182,36 @@
                         return catNameEn ? catNameEn : `<span class="text-body-tertiary">N/A</span>`;
                     }
                 },
-                // {
-                //     "data": "stock_qty",
-                //     "name": "stock_qty",
-                //     "searchable": true,
-                //     "orderable": true,
-                //     "visible": true,
-                //     render: function(stock_qty, type, row) {
-                //         return stock_qty > 0 ? `<span class="badge bg-light text-dark">In Stock</span>` :
-                //             `<span class="badge bg-danger">Out of Stock</span>`;
-                //     }
-                // },
+                {
+                    "data": "is_active",
+                    "name": "is_active",
+                    "searchable": false,
+                    "orderable": true,
+                    "visible": true,
+                    render: function(is_active, type, row) {
+                        return `<div class="d-flex justify-content-center align-items-center">
+                                <label class="switch-button">
+                                    <input type="checkbox" ${is_active==1?"checked":""} onclick="btnActive(${row.id})">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>`;
+                    }
+                },
+                {
+                    "data": "is_feature",
+                    "name": "is_feature",
+                    "searchable": false,
+                    "orderable": true,
+                    "visible": true,
+                    render: function(is_feature, type, row) {
+                        return `<div class="d-flex justify-content-center align-items-center">
+                                <label class="switch-button">
+                                    <input type="checkbox" ${is_feature==1?"checked":""} onclick="btnFeature(${row.id})">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>`;
+                    }
+                },
                 {
                     "data": null,
                     "name": "Action",
@@ -254,9 +291,10 @@
             $('#short_info_kh').val('');
             $('#short_info_en').val('');
             $('#price').val('');
-            $('#description_kh').val('');
-            $('#description_en').val('');
+            $('#description_en').summernote('code', '');
+            $('#description_kh').summernote('code', '');
             $('#featured_image').val('');
+            $('#displayFeaturedImage').attr('src', '');
         }
 
         // Edit Product
@@ -393,6 +431,68 @@
                             }
                         }
                     });
+                }
+            });
+        }
+
+        const btnActive = (id) => {
+            $.ajax({
+                url: "{{ url('admin/product/btn-active') }}/" + id,
+                type: "POST",
+                // data: {id:id},
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function() {
+                    $('#pageLoading').show();
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        $('#pageLoading').hide();
+                        toastr.success(response.message);
+                        getData();
+                    } else if (response.status == 'warning') {
+                        $('#pageLoading').hide();
+                        toastr.warning(response.message);
+                        getData();
+                    } else {
+                        $('#pageLoading').hide();
+                        toastr.error(response.message);
+                    }
+                }
+            });
+        }
+
+        const btnFeature = (id) => {
+            $.ajax({
+                url: "{{ url('admin/product/btn-feature') }}/" + id,
+                type: "POST",
+                // data: {id:id},
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function() {
+                    $('#pageLoading').show();
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        $('#pageLoading').hide();
+                        toastr.success(response.message);
+                        getData();
+                    } else if (response.status == 'warning') {
+                        $('#pageLoading').hide();
+                        toastr.warning(response.message);
+                        getData();
+                    } else {
+                        $('#pageLoading').hide();
+                        toastr.error(response.message);
+                    }
                 }
             });
         }

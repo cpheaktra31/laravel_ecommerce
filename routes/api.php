@@ -40,6 +40,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Products
     Route::get('product/get-data', [ProductController::class, 'getData'])->name('product.get-data');
+    Route::post('product/btn-active/{product}', [ProductController::class, 'btnActive'])->name('product.btn-active');
+    Route::post('product/btn-feature/{product}', [ProductController::class, 'btnFeature'])->name('product.btn-feature');
     Route::resource('product', ProductController::class);
     // Products
 
@@ -60,11 +62,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('menu/get-data', [MenuController::class, 'getData'])->name('menu.get-data');
     Route::resource('menu', MenuController::class);
     // Menus
-
-    // Dashboard
-    Route::get('dash-board/get-monthly-stock', [DashboardController::class, 'getMonthlyStock'])->name('dash-board.get-monthly-stock');
-    Route::get('dash-board/get-product-expire', [DashboardController::class, 'getProductExpire'])->name('dash-board.getProductExpire');
-    // Dashboard
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -283,8 +283,9 @@
             $('#title_kh').val('');
             $('#short_info_kh').val('');
             $('#short_info_en').val('');
-            $('#description_kh').val('');
-            $('#description_en').val('');
+            $('#description_en').summernote('code', '');
+            $('#description_kh').summernote('code', '');
+            $('#displayFeaturedImage').attr('src', '');
             $('#featured_image').val('');
         }
 

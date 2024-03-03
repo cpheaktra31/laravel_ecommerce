@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('title_en');
-            $table->string('title_kh');
-            $table->string('short_info_en');
-            $table->string('short_info_kh');
-            $table->text('description_kh');
+            $table->string('title_en', 255);
+            $table->string('title_kh', 255)->nullable();
+            $table->string('short_info_en', 500)->nullable();
+            $table->string('short_info_kh', 500)->nullable();
+            $table->text('description_kh')->nullable();
             $table->text('description_en');
             $table->string('featured_image');
             $table->boolean('is_active')->default(true);

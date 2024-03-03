@@ -21,6 +21,8 @@ class Product extends Model
         'price',
         'description_kh',
         'description_en',
-        'featured_image'
+        'featured_image',
+        'is_active',
+        'is_feature'
     ];
 }

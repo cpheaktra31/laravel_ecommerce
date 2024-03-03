@@ -29,9 +29,10 @@ class ProductController extends Controller
     /*______________
     |   Get Data
     */
-    public function getData() {
+    public function getData()
+    {
         try {
-            $sql = "SELECT *, c.name_en AS catNameEn, c.name_kh AS catNameKH
+            $sql = "SELECT p.*, c.name_en AS catNameEn, c.name_kh AS catNameKH
                 FROM products p
                 JOIN categories c ON p.category_id = c.id
                 WHERE p.deleted_at IS NULL
@@ -68,11 +69,11 @@ class ProductController extends Controller
         try {
             $validator = Validator($request->all(), [
                 'name_en' => 'required',
-                'name_kh' => 'required',
+                // 'name_kh' => 'required',
                 'category_id' => 'required',
                 'price' => 'required',
                 'description_en' => 'required',
-                'description_kh' => 'required',
+                // 'description_kh' => 'required',
                 'featured_image' => 'nullable|image|max:2048',
             ]);
 
@@ -117,8 +118,8 @@ class ProductController extends Controller
                     unlink($filePath);
                 }
                 $currentMonth = Carbon::now()->format('m');
-                $path = $request->file('featured_image')->storeAs('images/product/'.$currentMonth, $fileName, 'public');
-                $data['featured_image'] = '/storage/'.$path;
+                $path = $request->file('featured_image')->storeAs('images/product/' . $currentMonth, $fileName, 'public');
+                $data['featured_image'] = '/storage/' . $path;
             } else {
                 $data['featured_image'] = null;
             }
@@ -191,7 +192,7 @@ class ProductController extends Controller
                 }
                 $currentMonth = Carbon::now()->format('m');
                 $fileName = $request->file('featured_image')->getClientOriginalName();
-                $path = $request->file('featured_image')->storeAs('images/product/'.$currentMonth, $fileName, 'public');
+                $path = $request->file('featured_image')->storeAs('images/product/' . $currentMonth, $fileName, 'public');
                 $data->featured_image = '/storage/' . $path;
             }
 
@@ -227,5 +228,75 @@ class ProductController extends Controller
             'message' => 'Deleting product success!',
             'result' => $data
         ]);
+    }
+
+    /*______________
+    |   Active Button
+    */
+    public function btnActive($id)
+    {
+        try {
+            $product = Product::find($id);
+            $is_active = $product['is_active'];
+            $status = "success";
+            $msg = "Product " . $product['name_en'] . " is active!";
+            if ($is_active == 1) {
+                $is_active = 0;
+                $status = "warning";
+                $msg = "Product " . $product['name_en'] . " is in-active!";
+            } else
+                $is_active = 1;
+
+            $product['is_active'] = $is_active;
+            $product->save();
+
+            $products = Product::withoutTrashed()->get();
+            return response()->json([
+                'status' => $status,
+                'message' => $msg,
+                'result' => $products
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Updating product error!',
+                'result' => $th->getMessage(),
+            ]);
+        }
+    }
+
+    /*______________
+    |   Feature Button
+    */
+    public function btnFeature($id)
+    {
+        try {
+            $product = Product::find($id);
+            $is_feature = $product['is_feature'];
+            $status = "success";
+            $msg = "Product " . $product['name_en'] . " is added to feature!";
+            if ($is_feature == 1) {
+                $is_feature = 0;
+                $status = "warning";
+                $msg = "Product " . $product['name_en'] . " is removed from feature!";
+            } else
+                $is_feature = 1;
+
+            $product['is_feature'] = $is_feature;
+            $product->save();
+
+            $products = Product::withoutTrashed()->get();
+            return response()->json([
+                'status' => $status,
+                'message' => $msg,
+                'result' => $products
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Updating product error!',
+                'result' => $th->getMessage(),
+            ]);
+        }
     }
 }
