@@ -43,10 +43,17 @@
 
     <div class="carousel w-full">
         <div id="slide1" class="carousel-item relative w-full">
-            <div class="hero bg-base-200">
+            <div class="hero bg-white">
                 <div class="hero-content flex-col lg:flex-row-reverse">
-                    <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
-                        class="max-w-sm rounded-lg shadow-2xl" />
+                    {{-- <div class="overflow-hidden aspect-h-1 aspect-w-2 max-w-lg">
+                        <img src="https://i.pinimg.com/736x/3f/d0/9b/3fd09be7126301ca6a307662951fe660.jpg"
+                            class="h-full w-full object-cover object-center" />
+                    </div> --}}
+                    <div
+                        class="relative max-w-lg overflow-hidden bg-white lg:aspect-h-1 lg:aspect-w-1">
+                        <img src="https://i.pinimg.com/564x/4c/0c/a7/4c0ca78663337195569dc879135ca8d3.jpg"
+                            alt="" class="h-full w-full object-cover object-center">
+                    </div>
                     <div>
                         <h1 class="text-5xl font-bold">Box Office News!</h1>
                         <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
@@ -61,7 +68,7 @@
             </div>
         </div>
         <div id="slide2" class="carousel-item relative w-full">
-            <div class="hero bg-base-200">
+            <div class="hero bg-white">
                 <div class="hero-content flex-col lg:flex-row-reverse">
                     <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
                         class="max-w-sm rounded-lg shadow-2xl" />

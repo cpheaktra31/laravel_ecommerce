@@ -71,7 +71,7 @@ class ProductController extends Controller
                 'name_en' => 'required',
                 // 'name_kh' => 'required',
                 'category_id' => 'required',
-                'price' => 'required',
+                'max_price' => 'required',
                 'description_en' => 'required',
                 // 'description_kh' => 'required',
                 'featured_image' => 'nullable|image|max:2048',

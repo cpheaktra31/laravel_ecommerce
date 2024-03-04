@@ -19,7 +19,8 @@ return new class extends Migration {
             $table->string('slug_en', 500);
             $table->string('short_info_kh', 500)->nullable();
             $table->string('short_info_en', 500)->nullable();
-            $table->string('price');
+            $table->string('min_price');
+            $table->string('max_price');
             $table->text('description_kh')->nullable();
             $table->text('description_en');
             $table->string('featured_image');

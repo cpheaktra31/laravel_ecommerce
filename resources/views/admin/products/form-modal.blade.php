@@ -11,28 +11,29 @@
                         <div class="col-lg-8 col-md-9 col-sm-12">
                             <div class="mb-3">
                                 <label for="name_en">Name (English) <span class="text-danger">*</span> :</label>
-                                <input type="text" name="name_en" class="form-control" id="name_en"
-                                    value="{{ old('name_en') }}">
+                                <input type="text" name="name_en" class="form-control" id="name_en">
                             </div>
                             <div class="mb-3">
                                 <label for="name_kh">Name (Khmer) <span class="text-danger">*</span> :</label>
-                                <input type="text" name="name_kh" class="form-control" id="name_kh"
-                                    value="{{ old('name_kh') }}">
+                                <input type="text" name="name_kh" class="form-control" id="name_kh">
                             </div>
                             <div class="mb-3">
-                                <label for="price">Price <span class="text-danger">*</span> :</label>
-                                <input type="number" name="price" class="form-control" id="price"
-                                    value="{{ old('price') }}">
+                                <label for="max_price">Maximum Price <span class="text-danger">*</span> :</label>
+                                <input type="number" name="max_price" class="form-control" id="max_price">
+                            </div>
+                            <div class="mb-3">
+                                <label for="min_price">Minimum Price <span class="text-danger">*</span> :</label>
+                                <input type="number" name="min_price" class="form-control" id="min_price">
                             </div>
                             <div class="mb-3">
                                 <label for="description_en">Description (English) <span class="text-danger">*</span>
                                     :</label>
-                                <textarea id="description_en" name="description_en">{{ old('description_en') }}</textarea>
+                                <textarea id="description_en" name="description_en"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="description_kh">Description (Khmer) <span class="text-danger">*</span>
                                     :</label>
-                                <textarea id="description_kh" name="description_kh">{{ old('description_kh') }}</textarea>
+                                <textarea id="description_kh" name="description_kh"></textarea>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-12">

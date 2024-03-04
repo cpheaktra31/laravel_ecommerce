@@ -20,7 +20,8 @@
                                     <th>ID</th>
                                     <th>Image</th>
                                     <th>Name</th>
-                                    <th>Price</th>
+                                    <th>Max Price</th>
+                                    <th>Min Price</th>
                                     <th>Category</th>
                                     <th>Active</th>
                                     <th>Feature</th>
@@ -31,7 +32,8 @@
                                     <th>ID</th>
                                     <th>Image</th>
                                     <th>Name</th>
-                                    <th>Price</th>
+                                    <th>Max Price</th>
+                                    <th>Min Price</th>
                                     <th>Category</th>
                                     <th>Active</th>
                                     <th>Feature</th>
@@ -162,13 +164,24 @@
                     }
                 },
                 {
-                    "data": "price",
-                    "name": "price",
+                    "data": "max_price",
+                    "name": "max_price",
                     "searchable": true,
                     "orderable": true,
                     "visible": true,
-                    render: function(price, type, row) {
-                        return price ? changeCurrency(price, "USD") :
+                    render: function(max_price, type, row) {
+                        return max_price ? changeCurrency(max_price, "USD") :
+                            `<span class="text-body-tertiary">N/A</span>`;
+                    }
+                },
+                {
+                    "data": "min_price",
+                    "name": "min_price",
+                    "searchable": true,
+                    "orderable": true,
+                    "visible": true,
+                    render: function(min_price, type, row) {
+                        return min_price ? changeCurrency(min_price, "USD") :
                             `<span class="text-body-tertiary">N/A</span>`;
                     }
                 },
